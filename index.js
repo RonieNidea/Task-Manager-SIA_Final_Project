@@ -339,7 +339,10 @@ app.post("/api/tasks/:id/subtasks", async (req, res) => {
   const subtasks = data.subtasks || [];
 
   const newSubtask = {
-    id: Date.now().toString(),
+    id:
+    subtasks.length > 0
+      ? subtasks[subtasks.length - 1].id + 1
+      : 1,
     title: req.body.title,
     assignedTo:
       req.body.assignedTo || "Unassigned",
